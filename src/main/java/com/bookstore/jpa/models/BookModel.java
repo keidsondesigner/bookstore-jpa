@@ -5,9 +5,12 @@ import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,6 +25,10 @@ public class BookModel implements Serializable {
 
   @Column(nullable = false, unique = true)
   private String title;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "publisher_id")
+  private PublisherModel publisher;
 
   public static long getSerialversionuid() {
     return serialVersionUID;
@@ -41,5 +48,13 @@ public class BookModel implements Serializable {
 
   public void setTitle(String title) {
     this.title = title;
+  }
+
+  public PublisherModel getPublisher() {
+    return publisher;
+  }
+
+  public void setPublisher(PublisherModel publisher) {
+    this.publisher = publisher;
   }
 }
