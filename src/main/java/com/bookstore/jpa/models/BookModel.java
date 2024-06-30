@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,6 +43,10 @@ public class BookModel implements Serializable {
     inverseJoinColumns = @JoinColumn(name = "author_id") // referência da tabela 'tb_author' na coluna 'author_id' que é a chave primaria;
   )
   private Set<AuthorModel> authors = new HashSet<>(); // Um Livro tem uma colecção de Autores;
+
+  // CascadeType.ALL sempre executa todas as operações em cascata, exemplo deletar um Livro deleta todas as Reviews do Livro;
+  @OneToOne(mappedBy = "book", cascade =  CascadeType.ALL) // O dono do relacionamento, que é o 'book', mapeando referência do atributo 'book' no Relacionamento entre Livro e Review;
+  private ReviewModel review; // Uma Livro pertence a um só Review;
 
   public static long getSerialversionuid() {
     return serialVersionUID;
@@ -77,4 +83,14 @@ public class BookModel implements Serializable {
   public void setAuthors(Set<AuthorModel> authors) {
     this.authors = authors;
   }
+
+  public ReviewModel getReview() {
+    return review;
+  }
+
+  public void setReview(ReviewModel review) {
+    this.review = review;
+  }
+
+  
 }
