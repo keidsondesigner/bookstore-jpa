@@ -1,5 +1,7 @@
 package com.bookstore.jpa.services;
 
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +32,10 @@ public class BookService {
     this.publisherRepository = publisherRepository;
   }
 
+  public List<BookModel> getAllBooks() {
+    return bookRepository.findAll();
+  }
+
   @Transactional // Evitar conflitos de transaçãos; Caso uma operação falhe, todas as operações devem ser desfeitas(ROLLBACK) preservando os dados;
   public BookModel saveBook(BookRecordDTO bookRecordDTO) {
     BookModel book = new BookModel();
@@ -44,4 +50,9 @@ public class BookService {
 
     return bookRepository.save(book);
   }
+
+  @Transactional
+    public void deleteBook(UUID id){
+        bookRepository.deleteById(id);
+    }
 }
