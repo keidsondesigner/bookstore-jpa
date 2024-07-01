@@ -47,12 +47,12 @@ classDiagram
   Book "1" *-- "1" Review
 ```
 
-# A API expõe os seguintes endpoints para gerenciar os livros(Books):
+## A API expõe os seguintes endpoints para gerenciar os livros(Books):
 
 **POST** http://localhost:8080/bookstore/books Cria um novo Livro. O corpo da requisição deve conter um objeto válido.
 
 
-# Execução e uso dos endpoints:
+## Execução e uso dos endpoints:
 
 >Criando um Book(Livro) (POST /bookstore/books):
 
@@ -72,7 +72,7 @@ Exemplo:
 }
 ```
 
-# Execução da Aplicação
+## Execução da Aplicação
   
 >Pré-requisitos:
 - Java 17 instalado e configurado no PATH do sistema.
